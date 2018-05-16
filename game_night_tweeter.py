@@ -12,9 +12,16 @@ with open (quotes_file, 'r') as quotes:
     quotes = quotes.read()
 
 # Each new line in the file is now an entry in the quote_array array
-quote_array = quotes.splitlines()
-quote = quote_array.pop(random.randrange(len(quote_array)))
+quote_list = quotes.splitlines()
+quote = quote_list.pop(random.randrange(len(quote_list)))
 print quote
 
-# the quote has been saved in that string but removed from the array. The "quote_array" can now be saved back into s3
-#print quote_array
+# def twitter_post(quote):
+    # insert code here
+
+# def save_file():
+    # insert code to save quote_list back into quotes.txt line by line
+    # note: the quote posted online has been saved in the "quote" variable, but removed from the "quote_list" when we re-save it
+
+# def save_to_s3():
+    # insert code to save quote_list into s3 instead using boto3 for AWS
