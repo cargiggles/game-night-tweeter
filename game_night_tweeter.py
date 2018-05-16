@@ -4,6 +4,7 @@
 
 import os
 import random
+import twitter
 
 dir = os.path.dirname(__file__)
 quotes_file = os.path.join(dir, 'quotes.txt')
