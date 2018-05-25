@@ -1,6 +1,6 @@
 # Andrew Cargill
 # Game Night Tweeter
-# 2018-05-24 - v1.1
+# 2018-05-24 - v1.2
 
 import boto3
 import os
@@ -43,7 +43,7 @@ def lambda_handler(event, context):
         print quote_list
 
         if quote_list: # If quote_list contains items
-            quote = quote_list.pop(random.randrange(len(quote_list)))
+            quote = quote_list.pop(random.randrange(len(quote_list))).capitalize()
             twitter_post(quote)
         else:
             message = "The quote well's run dry!"
