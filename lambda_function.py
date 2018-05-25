@@ -1,6 +1,6 @@
 # Andrew Cargill
 # Game Night Tweeter
-# 2018-05-23 - v1.0
+# 2018-05-24 - v1.1
 
 import boto3
 import os
@@ -32,15 +32,10 @@ def twitter_post(quote):
     status = api.PostUpdate(quote)
     print(status.text)
 
-# This is for local hard drive use - update later for S3
-# dir = os.path.dirname(__file__)
-# quotes_file = os.path.join(dir, 'quotes.txt')
-
 def lambda_handler(event, context):
-    # This bit should save quotes.txt from s3, to lambda's tmp folder - can be a function
     s3 = boto3.resource('s3')
-    s3.Bucket(BUCKET_NAME).download_file("quotes.txt", "/tmp/quotes.txt") # pass function source and destination
-    quotes_file = "/tmp/quotes.txt" # return this pointer in future function
+    s3.Bucket(BUCKET_NAME).download_file("quotes.txt", "/tmp/quotes.txt")
+    quotes_file = "/tmp/quotes.txt"
 
     with io.open(quotes_file, "r", encoding = "utf-8") as f:
         quotes = f.read()
@@ -54,7 +49,6 @@ def lambda_handler(event, context):
             message = "The quote well's run dry!"
             send_sns_sms(PHONE_NUMBER, message)
 
-        # Update to save to S3
         with io.open(quotes_file, "w", encoding = "utf-8") as f:
             f.write("\n".join(quote_list).decode("utf-8"))
 
