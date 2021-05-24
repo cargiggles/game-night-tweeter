@@ -42,7 +42,7 @@ def lambda_handler(event, context):
     quote_list = [_f for _f in quotes.splitlines() if _f]
 
     if quote_list: # If quote_list contains items
-        quote = quote_list.pop(random.randrange(len(quote_list))).capitalize()
+        quote = quote_list.pop(random.randrange(len(quote_list)))
         twitter_post(quote)
     else:
         message = "The quote well's run dry!"
